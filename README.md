@@ -18,6 +18,7 @@ Sample usage:
     Iterators.range(3, 5) //Equivalent to 3...6; iterates over [3, 4].
     Iterators.range(5, 0, -1) //Iterates over [5, 4, 3, 2, 1].
     Iterators.range(10, 20, 2) //Iterates over [10, 12, 14, 16, 18].
+    Iterators.range(5, 0) //Does not iterate.
 
 from()
 ------
