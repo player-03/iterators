@@ -1,4 +1,4 @@
-haxe-iterators
-==============
+iterators
+=========
 
-Provides some iterators not included in the Haxe standard library.
+Some iterators that weren't included in the Haxe standard library.
