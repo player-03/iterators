@@ -160,7 +160,7 @@ class Iterators_impl {
 			return Math.ceil((end - start) / step - 1) * step + start;
 		} else {
 			//The loop should finish immediately.
-			return start;
+			return start - step;
 		}
 	}
 }
