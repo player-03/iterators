@@ -29,3 +29,13 @@ Sample usage:
 
     Iterators.from(0, 5) //Iterates over [0, 1, 2, 3, 4].
     Iterators.from(5, 0) //Iterates over [5, 4, 3, 2, 1].
+
+reverse()
+---------
+
+For iterating backwards over arrays.
+
+Sample usage:
+
+    Iterators.reverse(0, 5) //Iterates over [4, 3, 2, 1, 0].
+    Iterators.reverse(myArray.length) //Iterates backwards over the indices in myArray.
