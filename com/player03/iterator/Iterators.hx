@@ -61,6 +61,14 @@ class Iterators {
 	public static function from(start:Int, end:Int):InlineIntIterator {
 		return null;
 	}
+	
+	/**
+	 * Iterates from end to start, including start but skipping end.
+	 * This is ideal for iterating backwards over an array.
+	 */
+	public static function reverse(?start:Int = 0, end:Int):InlineIntIterator {
+		return null;
+	}
 }
 
 #else
@@ -109,6 +117,30 @@ class Iterators {
 		return macro new com.player03.iterator.InlineIntIterator($v{start}, $v{end}, $v{step});
 	}
 	
+	public static macro function reverse(startExpr:Expr, ?endExpr:Expr):Expr {
+		if(isNull(endExpr)) {
+			endExpr = macro 0;
+		} else {
+			//Swap the values here to simplify the rest of the code.
+			var tempExpr:Expr = startExpr;
+			startExpr = endExpr;
+			endExpr = tempExpr;
+		}
+		
+		var start:Null<Int> = getInt(startExpr);
+		var end:Null<Int> = getInt(endExpr);
+		
+		if(start == null || end == null) {
+			return macro com.player03.iterator.Iterators_impl.range($startExpr - 1, $endExpr - 1, -1);
+		}
+		
+		start--;
+		end--;
+		
+		end = Iterators_impl.rangeEndValue(start, end, -1);
+		return macro new com.player03.iterator.InlineIntIterator($v{start}, $v{end}, -1);
+	}
+	
 	private static function isNull(expr:Expr):Bool {
 		switch(expr.expr) {
 			case EConst(CIdent("null")):
@@ -145,8 +177,12 @@ class Iterators_impl {
 		return new InlineIntIterator(start, end, step);
 	}
 	
-	public static function from(start:Int, end:Int):InlineIntIterator {
+	public static inline function from(start:Int, end:Int):InlineIntIterator {
 		return range(start, end, end < start ? -1 : 1);
+	}
+	
+	public static inline function reverse(start:Int, end:Int):InlineIntIterator {
+		return range(end - 1, start - 1, -1);
 	}
 	
 	private static function rangeEndValue(start:Int, end:Int, step:Int):Int {
