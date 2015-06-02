@@ -69,6 +69,13 @@ class Iterators {
 	public static function reverse(?start:Int = 0, end:Int):InlineIntIterator {
 		return null;
 	}
+	
+	/**
+	 * Iterates over both given iterables, in order.
+	 */
+	public static function concat<T>(first:Iterable<T>, second:Iterable<T>):IteratorSequence<T> {
+		return null;
+	}
 }
 
 #else
@@ -163,6 +170,10 @@ class Iterators {
 			return null;
 		}
 	}
+	
+	public static macro function concat(first:Expr, second:Expr):Expr {
+		return macro new com.player03.iterator.IteratorSequence($first, $second);
+	}
 }
 
 @:native("com.player03.iterator.Iterators")
@@ -198,6 +209,10 @@ class Iterators_impl {
 			//The loop should finish immediately.
 			return start - step;
 		}
+	}
+	
+	public static inline function concat<T>(first:Iterable<T>, second:Iterable<T>):IteratorSequence<T> {
+		return new IteratorSequence(first.iterator(), second.iterator());
 	}
 }
 
