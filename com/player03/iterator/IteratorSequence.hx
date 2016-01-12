@@ -47,12 +47,12 @@ class IteratorSequence<T> {
 }
 
 abstract Iter<T>(Iterator<T>) from Iterator<T> to Iterator<T> {
-	@:from private static function fromIterable(iterable:Iterable<T>):Iter<T> {
+	@:from private static function fromIterable<T>(iterable:Iterable<T>):Iter<T> {
 		return iterable.iterator();
 	}
 	
 	#if openfl
-		@:from private static function fromVector(vector:openfl.Vector<T>):Iter<T> {
+		@:from private static function fromVector<T>(vector:openfl.Vector<T>):Iter<T> {
 			return vector.iterator();
 		}
 	#end
