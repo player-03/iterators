@@ -80,11 +80,6 @@ class Iterators {
 
 #else
 
-//This file contains two implementations to allow better compile-time
-//optimization. A full explanation can be found at
-//http://blog.onthewings.net/2012/07/17/haxe-tips-macro-proxied-class-with-macros-for-compile-time-and-implementation-for-run-time/
-
-#if !macro extern #end
 class Iterators {
 	public static macro function range(startExpr:Expr, ?endExpr:Expr, ?stepExpr:Expr = null):Expr {
 		//Emulate Python's optional first argument.
@@ -176,7 +171,6 @@ class Iterators {
 	}
 }
 
-@:native("com.player03.iterator.Iterators")
 @:allow(com.player03.iterator.Iterators)
 class Iterators_impl {
 	public static function range(start:Int, end:Int, ?step:Int = 1):InlineIntIterator {
