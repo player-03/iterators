@@ -43,13 +43,15 @@ class Iterators {
 	 * for(i in Iterators.range(5, 100, 2)) is equivalent to
 	 * for(var i = 5; i < 100; i += 2) in C syntax.
 	 * 
-	 * @param	start The value to start at.
+	 * @param	start The value to start at. If you only provide one
+	 * argument, start will default to 0 and your value will be used
+	 * as the end value.
 	 * @param	end The value to iterate towards. Iteration will stop
 	 * just before reaching this value.
 	 * @param	step The amount to increment by.
 	 * @return An iterator over the integers between start and end.
 	 */
-	public static function range(?start:Int = 0, end:Int, ?step:Int = 1):InlineIntIterator {
+	public static function range(?start:Int = 0, ?end:Int, ?step:Int = 1):InlineIntIterator {
 		return null;
 	}
 	
@@ -65,8 +67,10 @@ class Iterators {
 	/**
 	 * Iterates from end to start, including start but skipping end.
 	 * This is ideal for iterating backwards over an array.
+	 * @param	start If you only provide one argument, start will
+	 * default to 0 and your value will be used as the end value.
 	 */
-	public static function reverse(?start:Int = 0, end:Int):InlineIntIterator {
+	public static function reverse(?start:Int = 0, ?end:Int):InlineIntIterator {
 		return null;
 	}
 	
